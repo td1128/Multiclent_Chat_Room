@@ -1,0 +1,101 @@
+/* styles.css */
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Input field styles */
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    display: block;
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+/* Chat messages container styles */
+#messages {
+    margin-top: 20px;
+    padding: 10px;
+    max-height: 300px; /* Example max-height */
+    overflow-y: auto; /* Enable vertical scroll when content overflows */
+}
+
+/* Individual message styles (optional) */
+
+
+nav {
+    text-align: center; /* Aligns the content (image) center horizontally */
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    max-width: 955px;
+    margin: auto;
+}
+
+.input-container input[type="text"] {
+    flex: 1;
+    margin-right: 10px; /* Adjust margin as needed */
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+#sendBtn{
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.logo {
+    width: 100px; /* Set desired width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.container{
+    background-color: #cbd8e4;
+    max-width: 955px;
+    margin:auto;
+    height:60vh;
+    overflow-y: auto;
+}
+.message {
+    background-color: #f0f0f0;
+    width:24%;
+    padding: 5px;
+    margin: 5px 3px 3px;
+    border: 2px solid #5e5858;
+    border-radius: 5px;
+}
+
+.left{
+    float: left;
+    clear:both;
+}
+
+.right{
+    float: right;
+    clear:both;
+}

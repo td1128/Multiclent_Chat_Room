@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="/socket.io/socket.io.js"></script> 
+</head>
+<body>
+    <nav>
+        <img class="logo" src="logo.jpeg" alt="">
+    </nav>
+    <div class="container">
+        <!-- <div class="message left"></div> -->
+        <!-- <div class="message right"></div> -->
+    </div>
+    <div class="input-container">
+        <input type="text" placeholder="Write something......." id="message">
+        <!-- <input type="file" id="fileInput" accept="image/*, video/*"> -->
+        <button id="sendBtn">Send</button>
+    </div>
+    
+    <!-- <h1>Chat Room</h1> -->
+    <div id="messages">
+        
+    </div>
+    
+    <!-- This loads socket.io.js which is created when we initialise the Server in backend -->
+    <script>
+        const socket=io();
+        const sendBtn=document.getElementById('sendBtn');
+        const messageInput=document.getElementById('message');
+        const allMessages=document.getElementById('messages');
+        const messageContainer=document.querySelector('.container');
+        const name=prompt("Enter your name to join : ");
+        var audio=new Audio('alert_tone.mp3')
+
+        const append=(message,position)=>{
+            const messageElement=document.createElement('div');
+            messageElement.innerText=message;
+            messageElement.classList.add('message');
+            messageElement.classList.add(`${position}`);
+            messageContainer.append(messageElement);
+            if(position==='left') audio.play();
+        }
+
+        socket.emit('new-user-joined', name);
+
+        socket.on ('user-joined',name=>{
+            append(`${name} joined the chat`,'left');
+        })
+
+        socket.on('message', (data)=>{
+            console.log(data);
+            // const p=document.createElement('p');
+            // p.innerText=data;
+            // allMessages.appendChild(p);
+            append(`${data.name}: ${data.message}`,'left');
+        })
+
+        socket.on('user-disconnected',name=>{
+            append(`${name} left the chat`,'left');
+
+        });
+
+        sendBtn.addEventListener('click',(e)=>{
+            e.preventDefault();
+            const message=messageInput.value;
+            console.log(message);
+            append(`You: ${message}`,'right');
+            socket.emit('user-message',message);
+            messageInput.value='';
+        })
+
+        
+    </script>
+</body>
+</html>
